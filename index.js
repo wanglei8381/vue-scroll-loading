@@ -3,7 +3,7 @@ exports.install = function (Vue, options) {
     var threshold = options.threshold || 0;
     //获取滚动的元素
     var getScrollEventTarget = function (el) {
-        while (el.tagName !== 'BODY' && el.tagName !== 'HTML') {
+        while (el.nodeType === 1 && el.tagName !== 'BODY' && el.tagName !== 'HTML') {
             var overflowY = getComputedStyle(el).overflowY;
             if (overflowY === 'scroll' || overflowY === 'auto') {
                 return el;

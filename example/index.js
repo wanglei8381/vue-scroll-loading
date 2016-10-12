@@ -1,7 +1,7 @@
 var Vue = require('vue');
 
 Vue.use(require('../'), {
-    threshold: 10
+    threshold: 100
 });
 
 new Vue({

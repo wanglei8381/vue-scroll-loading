@@ -59,7 +59,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var Vue = __webpack_require__(1);
 	
 	Vue.use(__webpack_require__(3), {
-	    threshold: 10
+	    threshold: 100
 	});
 	
 	new Vue({
@@ -10464,7 +10464,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var threshold = options.threshold || 0;
 	    //获取滚动的元素
 	    var getScrollEventTarget = function getScrollEventTarget(el) {
-	        while (el.tagName !== 'BODY' && el.tagName !== 'HTML') {
+	        while (el.nodeType === 1 && el.tagName !== 'BODY' && el.tagName !== 'HTML') {
 	            var overflowY = getComputedStyle(el).overflowY;
 	            if (overflowY === 'scroll' || overflowY === 'auto') {
 	                return el;
@@ -10475,6 +10475,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	
 	    Vue.directive('scroll', {
+	
 	        bind: function bind() {
 	            if (this.el.nodeType !== 1) return;
 	
@@ -10485,14 +10486,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	                console.log('[vue][directive][scroll]请设置后调函数');
 	            };
 	
-	            if (self.expression && typeof vm.$get(self.expression) === 'function') {
-	                handler = vm.$get(self.expression);
+	            if (self.expression && typeof vm[self.expression] === 'function') {
+	                handler = vm[self.expression];
 	            }
 	
 	            var target = this.target = getScrollEventTarget(this.el);
 	            this.scrollListener = function () {
 	                if (target === window) {
-	                    if (document.documentElement.clientHeight + document.body.scrollTop >= document.documentElement.scrollHeight - _threshold) {
+	                    var scrollTop = Math.max(window.pageYOffset || 0, document.body.scrollTop);
+	                    if (document.documentElement.clientHeight + scrollTop >= document.documentElement.scrollHeight - _threshold) {
 	                        if (!vm.pauseScrollTrigger) {
 	                            handler();
 	                        }

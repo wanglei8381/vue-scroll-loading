@@ -1,6 +1,6 @@
 {
   "name": "vue-scroll-loading",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "滚动加载",
   "license": "MIT",
   "main": "index.js",
@@ -20,7 +20,7 @@
   "scripts": {
   },
   "dependencies": {
-    "vue": "^1.0.24"
+    "vue": "^2.0.3"
   },
   "devDependencies": {
     "babel-core": "^6.9.0",

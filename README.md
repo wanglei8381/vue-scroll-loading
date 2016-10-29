@@ -1,6 +1,6 @@
 #vue-scroll-loading
  <h5>基于vue的滚动加载插件</h5>
- <h6>以v-scroll="request"指令的方式存在</h6>
+ <h6>以v-scroll="request"指令的方式存在,从0.0.5开始支持vue2.0</h6>
 ##Install
 npm install vue-scroll-loading
 ##Use

@@ -5,7 +5,7 @@ Vue.use(require('../'), {
 });
 
 new Vue({
-    el: 'body',
+    el: '#cont',
     data: {
         size: 10,
         pauseScrollTrigger: false
@@ -27,7 +27,7 @@ new Vue({
             }, 3000);
         }
     },
-    ready: function () {
+    mounted: function () {
         var self = this;
         this.$scroll = this.$el.querySelector('.scroll-loading-wrapper');
         this.request();

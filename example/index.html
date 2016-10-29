@@ -26,7 +26,7 @@
   </style>
 </head>
 <body>
-<div v-scroll="request">
+<div v-scroll="request" id="cont" :pause-scroll-trigger="pauseScrollTrigger">
   <ul>
     <li v-for="idx of size">{{idx}}</li>
   </ul>

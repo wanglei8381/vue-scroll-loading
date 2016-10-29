@@ -15,41 +15,45 @@ exports.install = function (Vue, options) {
 
     Vue.directive('scroll', {
 
-        bind: function () {
-            if (this.el.nodeType !== 1) return;
+        inserted: function (el, binding) {
+            console.log(el.vm);
+            if (el.nodeType !== 1) return;
 
-            var self = this;
-            var vm = this.vm;
-            var _threshold = this.el.getAttribute('threshold') || threshold;
+            var _threshold = el.getAttribute('threshold') || threshold;
             var handler = function () {
                 console.log('[vue][directive][scroll]请设置后调函数');
             };
 
-            if (self.expression && typeof vm[self.expression] === 'function') {
-                handler = vm[self.expression];
+            if (typeof binding.value === 'function') {
+                handler = binding.value;
             }
 
-            var target = this.target = getScrollEventTarget(this.el);
-            this.scrollListener = function () {
+            var target = getScrollEventTarget(el);
+            var scrollListener = function () {
                 if (target === window) {
                     var scrollTop = Math.max(window.pageYOffset || 0, document.body.scrollTop);
                     if (document.documentElement.clientHeight + scrollTop >= document.documentElement.scrollHeight - _threshold) {
-                        if (!vm.pauseScrollTrigger) {
+                        if (!el.getAttribute('pause-scroll-trigger')) {
                             handler();
                         }
                     }
                 } else {
                     if (target.clientHeight + target.scrollTop >= target.scrollHeight - _threshold) {
-                        if (!vm.pauseScrollTrigger) {
+                        if (!el.getAttribute('pause-scroll-trigger')) {
                             handler();
                         }
                     }
                 }
-            }
-            target.addEventListener('scroll', this.scrollListener);
+            };
+
+            el.unbindEventListener = function () {
+                target.removeEventListener('scroll', scrollListener);
+            };
+
+            target.addEventListener('scroll', scrollListener);
         },
-        unbind: function () {
-            target.removeEventListener('scroll', this.scrollListener);
+        unbind: function (el) {
+            el.unbindEventListener();
         }
     });
 }

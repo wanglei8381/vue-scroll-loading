@@ -16,7 +16,6 @@ exports.install = function (Vue, options) {
     Vue.directive('scroll', {
 
         inserted: function (el, binding) {
-            console.log(el.vm);
             if (el.nodeType !== 1) return;
 
             var _threshold = el.getAttribute('threshold') || threshold;

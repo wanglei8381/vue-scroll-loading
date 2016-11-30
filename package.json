@@ -1,6 +1,6 @@
 {
   "name": "vue-scroll-loading",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "description": "滚动加载",
   "license": "MIT",
   "main": "index.js",
@@ -18,9 +18,6 @@
     "url": "https://github.com/wanglei8381/vue-scroll-loading/issues"
   },
   "scripts": {
-  },
-  "dependencies": {
-    "vue": "^2.0.3"
   },
   "devDependencies": {
     "babel-core": "^6.9.0",
